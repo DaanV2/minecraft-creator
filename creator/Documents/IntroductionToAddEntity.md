@@ -152,6 +152,25 @@ Unlike geometries, textures are linked by their path in the resource pack, minus
 
 In most cases, a custom material is not required. Instead, you can use a default material. In this example, we use `entity`. If the texture has transparent parts, you can use `entity_alphatest`, or if your texture is translucent (like stained glass), you can use `entity_alphablend`.
 
+## Render Controllers
+
+Render controllers allow us to change the geometry, textures, and materials of the entity using Molang. The following example shows how to use the geometry, material, and texture that have been linked in the client entity file as `default`:
+
+```json
+{
+    "format_version": "1.8.0",
+    "render_controllers": {
+        "controller.render.robot": {
+            "geometry": "Geometry.default",
+            "materials": [ { "*": "Material.default" }],
+            "textures": [ "Texture.default" ]
+        }
+    }
+}
+```
+
+If we just want to use one default geometry, material, and texture, we can just leave it to point to the default render controller as we did before. But in this example, I want to add random textures, so let’s break down how render controllers work first.
+
 ## Translation Strings
 
 Right now, neither the entity itself nor the spawn egg have a proper name in game. To define a name, we need a language file. Create a new folder called `texts` inside your resource pack and create a new file called `en_US.lang`. For custom entities, we only need to change this language file, as all other languages will default to American English. Inside this file, add these two lines:
@@ -271,24 +290,6 @@ The `scripts` and `animate` sections can be used to directly play animations:
 
 With these two tags added in the description tag of the client entity file, the drive animation will always be active and advance the wheel rotation while the entity is moving.
 
-## Render Controllers
-
-Render controllers allow us to change the geometry, textures, and materials of the entity using Molang. The following example shows how to use the geometry, material, and texture that have been linked in the client entity file as `default`:
-
-```json
-{
-    "format_version": "1.8.0",
-    "render_controllers": {
-        "controller.render.robot": {
-            "geometry": "Geometry.default",
-            "materials": [ { "*": "Material.default" }],
-            "textures": [ "Texture.default" ]
-        }
-    }
-}
-```
-
-If we just want to use one default geometry, material, and texture, we can just leave it to point to the default render controller as we did before. But in this example, I want to add random textures, so let’s break down how render controllers work first.
 
 ### Breakdown
 
